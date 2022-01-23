@@ -1,0 +1,53 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; }
+
+body{
+    background-image: url(../desafiosimulador/img/fondo.jpg);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+.contenedor{
+    height: 150vh;
+    width: 80vw;
+    background-color:rgb(0, 0, 0, 0.8);
+    border-radius: 30px;
+    margin-top: 15vh;
+    
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas: "prod1 prod2 prod3" "prod4 prod5 prod6" "prod7 prod8 prod9"
+}
+
+.producto{
+    text-align: center;
+    padding-top: 50px;
+}
+.producto img{
+    height: 170px;
+    width: 170px;
+    border-radius: 5px;
+    padding-bottom: 15px;
+}
+.producto h4{
+    font-size: 1.5em;
+    color: #fff;
+    padding-bottom: 15px;
+}
+.producto a{
+    color: #fff;
+    text-decoration: none;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 7px 15px;
+}
+.producto a:hover {
+    background: #868686;
+}
