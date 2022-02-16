@@ -1,51 +1,101 @@
 const contenedor = document.getElementById("contenedor")
 const contenedorCat = document.getElementById("contenedorCat")
 
+
 const catRopa = document.getElementById("ropa")
 const catAccesorios = document.getElementById("accesorios")
 
-const btncarrito = document.getElementById("btnCarrito")
+const btnCarrito = document.getElementById("btnCarrito")
+const contenedorCarrito = document.getElementById("contenedorCarrito")
 
+const precioFinal = document.getElementById("precioFinal")
+const contPrecioFinal = document.getElementsByClassName("precioFinal")
 
-let botonAgr = document.getElementsByClassName('btnComprar')
+const botonAgr = document.getElementsByClassName('btnComprar')
 
 let carrito = []
-let precioFinal = 0
-
 
 
 function mostrarProductos(array){
     contenedor.innerHTML='';
-    array.forEach(producto => {
-        
-        let div = document.createElement('div')
-        div.className = 'producto'
-        div.innerHTML += `<div class="card">
+    for (const producto of array) {
+        let div = document.createElement('div');
+        div.className = 'producto';
+        div.innerHTML += `
+                        <div class="card">
                             <div class="imagen">
-                                <img src="img/img.jpg" alt="">
+                                <img src="${producto.img}" alt="">
                             </div>
                             <div class="descripcion">
                                 <h4>${producto.nombre} ${producto.talle}</h4>
-                                <button id="${producto.id}" class="btnComprar" >comprar</button>
+                                <p>$${producto.precio}</p>
+                                <button id="botonAgregar${producto.id}" class="btnComprar" >Comprar</button>
                             </div>  
                         </div>
-                        `
-        contenedor.appendChild(div)
+        `
+    contenedor.appendChild(div);
 
-    });
-}
-
-function mostrarCarrito(){
-    contenedor.innerHTML='';
+    let btnAgregar = document.getElementById(`botonAgregar${producto.id}`)
     
-    let divCarrito = document.createElement('div')
-    divCarrito.className = 'carrito'
-    divCarrito.innerHTML += `
-    <p>El precio total del carrito es de $${precioFinal}</p>
-    `
-    contenedor.appendChild(divCarrito)
+    btnAgregar.addEventListener('click', ()=>{
+        agregarAlCarrito(producto.id)
+    })
+    }
 }
 
+function agregarAlCarrito(id){
+    let repetido = carrito.find(item => item.id == id)
+    if (repetido){
+        
+        repetido.cantidad = repetido.cantidad + 1
+        document.getElementById(`cantidad${repetido.id}`).innerHTML = `<p id=cantidad${repetido.id}>Cantidad: ${repetido.cantidad}</p>`
+        actualizarCarrito()
+    } else{
+        let productoAgregar = stockProductos.find(elemento => elemento.id == id)
+        carrito.push(productoAgregar)
+        actualizarCarrito()
+
+        let divCarrito = document.createElement('div')
+        divCarrito.className = 'carrito'
+        divCarrito.innerHTML += `   <p>${productoAgregar.nombre}</p>                                  
+                                    <p id=cantidad${productoAgregar.id}>Cantidad: ${productoAgregar.cantidad}</p>
+                                    <p>Precio: $${productoAgregar.precio}</p>
+                                    <button id=botonEliminar${productoAgregar.id} class="botonEliminar">Eliminar</i></button>
+        `
+        contenedorCarrito.appendChild(divCarrito)
+
+        let btnEliminar = document.getElementById(`botonEliminar${productoAgregar.id}`)
+        btnEliminar.addEventListener('click', ()=>{
+            productoAgregar.cantidad = productoAgregar.cantidad - 1
+            document.getElementById(`cantidad${productoAgregar.id}`).innerHTML = `<p id=cantidad${productoAgregar.id}>Cantidad: ${productoAgregar.cantidad}</p>`
+            actualizarCarrito()
+            if (productoAgregar.cantidad <=0){
+                btnEliminar.parentElement.remove()
+                carrito = carrito.filter(elemento => elemento.id != productoAgregar.id)
+            }
+            localStorage.setItem('carrito', JSON.stringify(carrito))
+        })
+    }
+    localStorage.setItem('carrito', JSON.stringify(carrito))
+
+}
+
+
+function actualizarCarrito(){
+    precioFinal.innerText = carrito.reduce((acc,el) => acc + (el.precio * el.cantidad), 0)
+}
+
+
+function recuperar() {
+    let recuperarLS = JSON.parse(localStorage.getItem('carrito'))
+    if (recuperarLS){
+        recuperarLS.forEach(element => (
+            agregarAlCarrito(element.id)
+        ))
+    }
+}
+
+recuperar()
 
 
 
@@ -55,14 +105,6 @@ catRopa.addEventListener('click', ()=>{
     if(catRopa.id == 'ropa'){
         mostrarProductos(stockProductos.filter(el => el.categoria == catRopa.id))
     }
-    for (const boton of botonAgr){
-        boton.addEventListener('click', ()=>{
-            let producto = stockProductos.find(item => item.id == boton.id)
-            console.log(`agregaste al carrito ${producto.nombre} ${producto.talle}`)
-            carrito.push(producto)
-            precioFinal += producto.precio
-        })
-    }
 })
 
 catAccesorios.addEventListener('click', ()=>{
@@ -71,198 +113,4 @@ catAccesorios.addEventListener('click', ()=>{
     if(catAccesorios.id == 'accesorios'){
         mostrarProductos(stockProductos.filter(el => el.categoria == catAccesorios.id))
     }
-    for (const boton of botonAgr){
-        boton.addEventListener('click', ()=>{
-            let producto = stockProductos.find(item => item.id == boton.id)
-            console.log(`agregaste al carrito ${producto.nombre}`)
-            carrito.push(producto)
-            precioFinal += producto.precio
-        })
-    }
 })
-
-btncarrito.addEventListener('click', ()=>{
-    
-    console.log(carrito)
-    mostrarCarrito()
-    console.log(`el precio total del carrito es de $${precioFinal}`)
-})
-
-
-
-
-/* mostrarProductos(); */
-
-
-/* for (const boton of botonAgr){
-    console.log(boton)
-    boton.addEventListener('click', ()=>{
-        console.log(boton.id);
-        let producto = stockProductos.find(item => item.id == boton.id)
-    })
-} */
-
-/* console.log(botonAgr) */
-
-
-/* talles.addEventListener('change', ()=> {
-    console.log(talles.value)
-    if(talles.value =='all'){
-        mostrarProductos(stockProductos)
-        for (const boton of botonAgr){
-            boton.addEventListener('click', ()=>{
-                console.log(boton.id);
-                let producto = stockProductos.find(item => item.id == boton.id)
-            })
-        }
-    }else{
-        mostrarProductos(stockProductos.filter(el => el.talle == talles.value))
-        for (const boton of botonAgr){
-            boton.addEventListener('click', ()=>{
-                console.log(boton.id);
-                let producto = stockProductos.find(item => item.id == boton.id)
-            })
-        }
-    }
-}) */
-
-/* contenedor.innerHTML=''; */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* let cantidad = 0
-let carrito = ""
-let continuar = ""
-let precioFinal = 0
-
-
-function Agregado(){
-    console.log("Agregaste " + carrito + " x " + cantidad + " a tu carrito.") 
-}
-function Cantidad(){
-    cantidad = Number(prompt("¿Que cantidad te gustaria agregar?"))
-}
-
-function mostrar(){
-    for ( producto of BBDD){
-        console.log(producto.nombre + " $" + producto.precio)
-    }
-}
-
-function ordenarPrecio(){
-    BBDD.sort((a,b)=>{
-        return a.precio - b.precio
-    })
-}
-
-
-
-class productos{
-    constructor(nombre,precio){
-        this.nombre = nombre;
-        this.precio = precio;
-    }
-}
-
-const producto1 = new productos ("Gorra", 500);
-const producto2 = new productos ("Cadenita", 250);
-const producto3 = new productos ("Stickers", 50);
-const producto4 = new productos ("Remera", 1500);
-const producto5 = new productos ("Buzo", 2500);
-const producto6 = new productos ("Campera", 2000);
-
-const BBDD = [
-    producto1, producto2, producto3, producto4, producto5, producto6
-] 
-
-
-const mayorista = BBDD.map((el) => {
-    return{
-        nombre: el.nombre,
-        precio: el.precio * 0.8
-    }
-})
-function mostrarMayorista(){
-    for ( producto of mayorista){
-        console.log(producto.nombre + " $" + producto.precio)
-    }
-}
-
-
-mostrar()
-
-do{
-    let inicio = prompt("¿elije una opcion 1.Ordenar 2.Comprar 3.Mayorista?").toLowerCase()
-    switch(inicio){
-        case "1":
-            ordenarPrecio()
-            console.clear()
-            mostrar()
-            break
-        case "2":
-            do{
-                carrito = prompt("¿Que quieres agregar al carrito?").toLowerCase()
-                    switch(carrito){
-                        case "gorra":
-                            Cantidad()
-                            precioFinal += 500 * cantidad
-                            Agregado()
-                            break
-                        case "cadenita":
-                            Cantidad()
-                            precioFinal += 250 * cantidad
-                            Agregado()
-                            break
-                        case "stickers":
-                            Cantidad()
-                            precioFinal += 50 * cantidad
-                            Agregado()
-                            break
-                        case "remera":
-                            Cantidad()
-                            precioFinal += 1500 * cantidad
-                            Agregado()
-                            break
-                        case "buzo":
-                            Cantidad()
-                            precioFinal += 2500 * cantidad
-                            Agregado()
-                            break
-                        case "campera":
-                            Cantidad()
-                            precioFinal += 2000 * cantidad
-                            Agregado()
-                            break
-                        default:
-                            alert("Ingresa un producto valido.")
-                            break
-                    }
-                    continuar = prompt("¿Quiere agregar algo más? Si, no.").toLowerCase()
-                } while (continuar == "si")
-                    alert("El precio final es de: $" + precioFinal)
-            break
-        case"3":
-            console.clear()
-            mostrarMayorista()
-            break
-        default:
-            alert("Ingresa una opción válida")
-            break
-    }
-    continuar = prompt("¿Quieres hacer algo mas? Si, no.").toLowerCase()
-} while (continuar == "si")
- */

@@ -8,27 +8,29 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <div> 
-        <button id="btnCarrito">Ver carrito</button>
-   </div>`
+
     <div class="contenedor-principal" id="contenedorPrincipal">
         <div id="contenedorCat">
-            <img src="img/ropa.jpg" id="ropa" alt="">
-            <img src="img/accesorios.jpg" id="accesorios" alt="">
+            <div class="opcionesCat">
+                <img src="img/ropa.jpg" id="ropa" alt="">
+                <img src="img/accesorios.jpg" id="accesorios" alt="">
+            </div>
         </div>
-        
-        <!-- <select id="talles">
-            <option value="all">Todos</option>
-            <option value="S">Small</option>
-            <option value="M">Medium</option>
-            <option value="L">Large</option>
-            <option value="XL">XL</option>
-            <option value="UNICO">Unico</option>
-        </select> -->
+
         <div class="contenedor" id="contenedor">
             
         </div>
     </div>
+
+    <div class="modalCarrito">
+        <h3>Carrito de compras:</h3>
+        <div class="contenedorCarrito" id="contenedorCarrito">
+
+        </div>
+        <p class="precioFinal">Precio Final: $<span id="precioFinal">0</span></p>
+    </div>
+
+
 
     
 </body>
