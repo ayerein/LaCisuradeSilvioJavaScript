@@ -15,4 +15,6 @@ let stockProductos = [
     {id: 14, nombre: "Gorra2", categoria: "accesorios", talle: "", precio: 1200, img:'img/gorra1.jpg' , cantidad: 1},
     {id: 15, nombre: "Cadenita", categoria: "accesorios", talle: "", precio: 800, img:'img/cadenita1.jpg' , cantidad: 1},
     {id: 16, nombre: "Dije", categoria: "accesorios", talle: "", precio: 1000, img:'img/cadenita1.jpg' , cantidad: 1},
+    {id: 17, nombre: "Cd 1", categoria: "cds", talle: "", precio: 1300, img:'img/cd1.jpg' , cantidad: 1},
+    {id: 18, nombre: "Cd 2", categoria: "cds", talle: "", precio: 1600, img:'img/cd2.jpg' , cantidad: 1},
 ]
