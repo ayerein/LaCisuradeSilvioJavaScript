@@ -21,6 +21,9 @@ const nombre = document.getElementById('nombre')
 const direccion = document.getElementById('direccion')
 
 let carrito = []
+let stockProductos = []
+
+let categoriaElegida = ''
 
 
 function mostrarProductos(array){
@@ -125,25 +128,38 @@ function recuperar() {
 recuperar()
 
 
-catRopa.addEventListener('click', ()=>{
-    if(catRopa.id == 'ropa'){
+async function obtenerElementos(){
+    const respuesta = await fetch ('bbdd.json')
+    const data = await respuesta.json()
+
+    stockProductos = data
+
+    if(categoriaElegida == 'ropa'){
         mostrarProductos(stockProductos.filter(el => el.categoria == catRopa.id))
-    }
-    categorias.classList.replace('opcionesCat', 'categoriasDos');
-})
-
-catAccesorios.addEventListener('click', ()=>{
-    if(catAccesorios.id == 'accesorios'){
+    }else if(categoriaElegida == 'accesorios'){
         mostrarProductos(stockProductos.filter(el => el.categoria == catAccesorios.id))
-    }
-    categorias.classList.replace('opcionesCat', 'categoriasDos');
-})
-
-catCds.addEventListener('click', ()=>{
-    if(catCds.id == 'cds'){
+    }else if(categoriaElegida == 'cds'){
         mostrarProductos(stockProductos.filter(el => el.categoria == catCds.id))
     }
     categorias.classList.replace('opcionesCat', 'categoriasDos');
+}
+
+
+catRopa.addEventListener('click', ()=>{
+    
+    obtenerElementos()
+    categoriaElegida = 'ropa'
+
+})
+
+catAccesorios.addEventListener('click', ()=>{
+    obtenerElementos()
+    categoriaElegida = 'accesorios'
+})
+
+catCds.addEventListener('click', ()=>{
+    obtenerElementos()
+    categoriaElegida = 'cds'
 })
 
 
@@ -185,4 +201,4 @@ btnFinalizar.addEventListener('click', ()=>{
        
     }
     
-}) 
+})

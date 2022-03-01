@@ -1,4 +1,4 @@
-let stockProductos = [
+/* let stockProductos = [
     {id: 1, nombre: "Remera", categoria: "ropa", talle: "S", precio: 1500, img:'img/remera1.jpg' , cantidad: 1},
     {id: 2, nombre: "Remera", categoria: "ropa", talle: "M", precio: 1500, img:'img/remera1.jpg' , cantidad: 1},
     {id: 3, nombre: "Remera", categoria: "ropa", talle: "L", precio: 1500, img:'img/remera1.jpg' , cantidad: 1},
@@ -17,4 +17,4 @@ let stockProductos = [
     {id: 16, nombre: "Dije", categoria: "accesorios", talle: "", precio: 1000, img:'img/cadenita1.jpg' , cantidad: 1},
     {id: 17, nombre: "Cd 1", categoria: "cds", talle: "", precio: 1300, img:'img/cd1.jpg' , cantidad: 1},
     {id: 18, nombre: "Cd 2", categoria: "cds", talle: "", precio: 1600, img:'img/cd2.jpg' , cantidad: 1},
-]
+] */
