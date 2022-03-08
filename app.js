@@ -110,22 +110,25 @@ function agregarAlCarrito(id){
 
 
 
-
 function actualizarCarrito(){
     precioFinal.innerText = carrito.reduce((acc,el) => acc + (el.precio * el.cantidad), 0)
 }
 
 
 function recuperar() {
+    
     let recuperarLS = JSON.parse(localStorage.getItem('carrito'))
     if (recuperarLS){
         recuperarLS.forEach(element => (
             agregarAlCarrito(element.id)
         ))
+    } else {
+        carrito = []
     }
 }
 
 recuperar()
+
 
 
 async function obtenerElementos(){
@@ -143,6 +146,13 @@ async function obtenerElementos(){
     }
     categorias.classList.replace('opcionesCat', 'categoriasDos');
 }
+
+
+
+
+
+
+
 
 
 catRopa.addEventListener('click', ()=>{
@@ -202,3 +212,5 @@ btnFinalizar.addEventListener('click', ()=>{
     }
     
 })
+
+ 
