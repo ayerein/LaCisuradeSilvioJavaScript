@@ -5,40 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desafio</title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     
-    <div class="contenedor-principal" id="contenedorPrincipal">
+    <div class="contenedorPrincipal" id="contenedorPrincipal">
 
-        <div id="contenedorCat">
-            <div class="opcionesCat" id="categorias">
-                <div class="ropa">    
-                    <img src="img/ropa.png" id="ropa" alt="">
-                    <p>Ropa</p>
-                </div>
-                <div class="accesorios">
-                    <img src="img/accesorios.png" id="accesorios" alt="">
-                    <p>Accesorios</p>
-                </div>
-                <div class="Cds">
-                    <img src="img/cd.png" id="cds" alt="">
-                    <p>Cds</p>    
-                </div>
-                <div class="abrirModal">
-                    <button class="btnModal" id="btnModal"><img src="img/carrito.png" alt=""></button>
-                    <p>Abrir Carrito</p>
-                </div>
+        <div class="opcionesCat" id="categorias">
+            <div class="ropa">    
+                <img src="img/ropa.png" id="ropa" alt="">
+                <p>Ropa</p>
+            </div>
+            <div class="accesorios">
+                <img src="img/accesorios.png" id="accesorios" alt="">
+                <p>Accesorios</p>
+            </div>
+            <div class="Cds">
+                <img src="img/cd.png" id="cds" alt="">
+                <p>Cds</p>    
+            </div>
+            <div class="abrirModal">
+                <button class="btnModal" id="btnModal"><img src="img/carrito.png" alt=""></button>
+                <p>Abrir Carrito</p>
             </div>
         </div>
 
-        <div class="contenedor" id="contenedor">
+        <div class="contenedor" id="contenedor"></div>
             
-        </div>
     </div>
 
 
-    <div class="finalizarCompra" id="finalizarCompra">
+    <div class="finalizarCompra" id="modalFinalizarCompra">
         <div class="cerrarModal">
             <button class="btnCerrarModal" id="btnCerrarModal">Cerrar</button>
         </div>
@@ -70,11 +67,14 @@
         <div class="contenedorCarro">
 
             <div class="carritoFC" id="carritoFC">
-                <h3>Productos que agregaste al carrito:</h3>
+                <h3 id="tituloCarrito">Tu carrito esta vacio</h3>
                 
                     
                 
                 <div class="contenedorCarrito" id="contenedorCarrito"></div>
+                <div class="contenedorDescuento" id="contenedorDescuento">
+                    <input type="button" value="Tengo un codigo de descuento" id="btnDescuento" class="btnDescuento">
+                </div>
                 <p class="precioFinal">Precio Final: $<span id="precioFinal">0</span></p>
             </div>
         </div>
