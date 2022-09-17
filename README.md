@@ -15,7 +15,7 @@ Al ingresar a una categoría, se muestran los productos, y siguen presentes las 
 Dentro del carrito de compras, se pueden observar los productos elegidos, el precio total, opción de agregar código de descuento  y un formulario para los datos de envío.
 
 
-Para ver la pagina web puedes ingresar en [este link.](https://lacisuradesilvio-html.netlify.app)
+Para ver la pagina web puedes ingresar en [este link.](https://lacisuradesilvio-js.netlify.app)
 
 ## Descripción del proyecto
 Se busco implementar todos los conocimientos adquiridos en el curso y sumarlos al estilo ya existente de la web creada en el curso anterior. 
